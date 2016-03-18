@@ -1,5 +1,3 @@
-** WARNING : if you use github, use STABLE branch (v1.1.2) ** 
-
 Version history :
 - 1.1 : stable version not working (bug)
 - 1.1.1 : stable version working as local plugin
