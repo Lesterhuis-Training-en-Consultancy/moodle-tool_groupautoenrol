@@ -13,7 +13,7 @@ Version 1.1.2 (stable version)
 Plugin to randomly auto enrol students in Moodle courses groups when they are enrolled into the course (whatever the enrol methods : auto-enrol by key, cohorts sync or manual enrol)
 
 Things to know :
-- The plugin use \core\event\user_enrolment_created (user_enrolled) Moodle event
+- The plugin uses \core\event\user_enrolment_created (user_enrolled) Moodle event
 - If a selected group is deleted, the plugin will ignore it.
 
 In this stable version (1.1.2) :
