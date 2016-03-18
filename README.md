@@ -9,7 +9,8 @@ moodle-admin_tool_groupautoenrol
 Version 1.1.2 (stable version)
 
  
-**ENGLISH**
+ENGLISH
+-------
 Plugin to randomly auto enrol students in Moodle courses groups when they are enrolled into the course (whatever the enrol methods : auto-enrol by key, cohorts sync or manual enrol)
 
 Things to know :
@@ -27,8 +28,7 @@ It's a local plugin because adding link into "Course administration" menu was no
 You can get it here : https://github.com/pascal-my/moodle-local_groupautoenrol/tree/STABLE
 
 
-installation
-------------
+**installation**
 * Copy the directory 'groupautoenrol' into the `moodledir/admin/tool` directory.
 * Connect to moodle as an administrator and install the plugin.
 * Go to a course, create at least one group
@@ -36,7 +36,8 @@ installation
 Note : this link appears even if the plugin is not enabled for the course
 
 
-**FRENCH**
+FRENCH
+------
 Plugin permettant l'inscription automatique aléatoire des étudiants dans les groupes des cours lors de leur inscription au cours (qu'elle se fasse par la synchronisation des cohortes, par clé d'inscription ou manuellement).
 
 Précisions :
@@ -49,15 +50,14 @@ Version stable (1.1.2) :
 - plugin activable par cours
 - l'inscription automatique se fait dans tous les groupes du cours ou uniquement dans des groupes sélectionnés.
 
-Compatibilité 
+Compatibilité
 - Version testée avec Moodle 3.0
 - Une version fonctionnant avec Moodle 2.5 et 2.7 existe (Non testé avec les autres versions mais il doit fonctionner avec toutes les versions de Moodle 2.x).
 Il s'agit d'un plugin "local" car avant Moodle 3.0, il n'était pas possible d'ajouter un lien dans le menu "Administration du cours" pour les plugin de type "admin tool".
 Il est téléchargeable ici : https://github.com/pascal-my/moodle-local_groupautoenrol/tree/STABLE
 
 
-installation
-------------
+**Installation**
 * Copier le dossier 'groupautoenrol' dans le répertoire `moodledir/admin/tool`.
 * Se connecter en admin et installer le plugin.
 * Aller dans un cours et créer au moins 1 groupe
