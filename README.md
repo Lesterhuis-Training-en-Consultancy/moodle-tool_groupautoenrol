@@ -1,7 +1,7 @@
 Version history :
 - 1.1 : stable version not working (bug)
-- 1.1.1 : stable version working as local plugin
-- 1.1.2 : stable version working as admin tool plugin
+- 1.1.1 : stable version working as local plugin for Moodle 2.x (see https://github.com/pascal-my/moodle-local_groupautoenrol)
+- 1.1.2 : stable version working as admin tool plugin for Moodle 3.x
 
 
 moodle-admin_tool_groupautoenrol
