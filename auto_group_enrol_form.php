@@ -40,8 +40,7 @@ function auto_group_enrol_form(MoodleQuickForm $mform, $page, $course) {
     $allgroupscourse = groups_get_all_groups($course->id);
     // Group(s) must be created first.
     if (count($allgroupscourse) == 0) {
-        $mform->addElement('static', 'no_group_found', '', get_string('auto_group_enrol_form_no_group_found',
-            'tool_groupautoenrol', (string)$course->id));
+        $mform->addElement('static', 'no_group_found', '', "<a href='/group/index.php?id=".$course->id."'>".get_string('auto_group_enrol_form_no_group_found','tool_groupautoenrol')."</a>");
     } else {
         $instance = false;
         if ( isset($course->id) ) {
