@@ -25,7 +25,7 @@ require_once('../../../config.php');
 require_once('./manage_auto_group_enrol_form.php');
 
 $id = required_param('id', PARAM_INT);
-$url = new moodle_url("$CFG->wwwroot/admin/tool/groupautoenrol/manage_auto_group_enrol.php", array('id' => $id) );
+$url = new moodle_url('/admin/tool/groupautoenrol/manage_auto_group_enrol.php', array('id' => $id) );
 $PAGE->set_url($url);
 // TODO we need to gracefully shutdown if course not found.
 $course   = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
