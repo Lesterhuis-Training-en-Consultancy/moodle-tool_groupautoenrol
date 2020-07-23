@@ -43,16 +43,19 @@ $PAGE->set_context($context);
 $PAGE->set_pagelayout('admin');
 $PAGE->set_heading($course->fullname);
 
-$form = new manage_auto_group_enrol_form($url, ['course' => $course, 'page' => $PAGE, 'context' => $context]);
+$form = new \tool_groupautoenrol\form\manage_auto_group_enrol_form($url, [
+    'course' => $course,
+]);
 
 if ($form->is_cancelled()) {
     redirect(new moodle_url("$CFG->wwwroot/course/view.php", ['id' => $course->id]));
 } else if ($data = $form->get_data()) {
-    // Checkbox cleaning : if checkbox are unchecked, the value is empty or null, this is not compatible with "tinyint" in database.
-    if (!isset($data->enable_enrol) || ($data->enable_enrol == null) || ($data->enable_enrol == "")) {
+
+    if (empty($data->enable_enrol)) {
         $data->enable_enrol = 0;
     }
-    if (!isset($data->use_groupslist) || ($data->use_groupslist == null) || ($data->use_groupslist == "")) {
+
+    if (empty($data->use_groupslist)) {
         $data->use_groupslist = 0;
     }
 
@@ -60,21 +63,23 @@ if ($form->is_cancelled()) {
     $groupautoenrol->courseid = $course->id;
     $groupautoenrol->enable_enrol = $data->enable_enrol;
     $groupautoenrol->use_groupslist = $data->use_groupslist;
+
     if (isset($data->groupslist)) { // Could be not set.
         $groupautoenrol->groupslist = implode(",", $data->groupslist);
     }
 
     $record = $DB->get_record('tool_groupautoenrol', ['courseid' => $course->id], 'id');
     if (!$record) {
-        $DB->insert_record('tool_groupautoenrol', $groupautoenrol, false);
+        $DB->insert_record('tool_groupautoenrol', $groupautoenrol);
     } else {
         $groupautoenrol->id = $record->id;
         $DB->update_record('tool_groupautoenrol', $groupautoenrol);
     }
+
     redirect(new moodle_url("$CFG->wwwroot/admin/tool/groupautoenrol/manage_auto_group_enrol.php", ['id' => $course->id]));
 }
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('auto_group_form_page_title', 'tool_groupautoenrol'));
-$form->display();
+echo $form->render();
 echo $OUTPUT->footer();
