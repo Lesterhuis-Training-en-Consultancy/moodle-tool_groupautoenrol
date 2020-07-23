@@ -9,6 +9,7 @@ Plugin to randomly auto enrol students in Moodle courses groups when they are en
 - If a selected group is deleted, the plugin will ignore it.
 
 ##In this stable version (3.9.0) :
+- GDPR implementation
 - you can choose to enable the plugin in each course
 - you can choose to auto-enrol students in all existing course or specific ones
 
