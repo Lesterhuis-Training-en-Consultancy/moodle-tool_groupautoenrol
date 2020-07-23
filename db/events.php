@@ -21,9 +21,11 @@
  * @author     Pascal M - https://github.com/pascal-my
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$observers = array(
-    array(
+defined('MOODLE_INTERNAL') || die;
+
+$observers = [
+    [
         'eventname' => '\core\event\user_enrolment_created',
-        'callback'  => 'tool_groupautoenrol_observer::user_is_enrolled',
-    )
-);
+        'callback' => 'tool_groupautoenrol_observer::user_is_enrolled',
+    ],
+];

@@ -30,21 +30,22 @@ require_once("$CFG->libdir/formslib.php");
  * @param object $mform
  * @param object $page
  * @param object $course
+ *
  * @return nothing
  */
 function auto_group_enrol_form(MoodleQuickForm $mform, $page, $course) {
     global $CFG, $USER, $DB;
 
     $mform->addElement('header', 'enrol', get_string('settings'));
-    $data = array();
+    $data = [];
     $allgroupscourse = groups_get_all_groups($course->id);
     // Group(s) must be created first.
     if (count($allgroupscourse) == 0) {
-        $mform->addElement('static', 'no_group_found', '', "<a href='".$CFG->wwwroot."/group/index.php?id=".$course->id."'>".get_string('auto_group_enrol_form_no_group_found','tool_groupautoenrol')."</a>");
+        $mform->addElement('static', 'no_group_found', '', "<a href='" . $CFG->wwwroot . "/group/index.php?id=" . $course->id . "'>" . get_string('auto_group_enrol_form_no_group_found', 'tool_groupautoenrol') . "</a>");
     } else {
         $instance = false;
-        if ( isset($course->id) ) {
-            $instance = $DB->get_record('tool_groupautoenrol', array('courseid' => $course->id));
+        if (isset($course->id)) {
+            $instance = $DB->get_record('tool_groupautoenrol', ['courseid' => $course->id]);
         }
 
         $mform->addElement('checkbox', 'enable_enrol', get_string('auto_group_form_enable_enrol', 'tool_groupautoenrol'));
@@ -64,7 +65,7 @@ function auto_group_enrol_form(MoodleQuickForm $mform, $page, $course) {
         $mform->setDefault('use_groupslist', $usegroupslist);
         $mform->disabledIf('use_groupslist', 'enable_enrol');
 
-        $fields = array();
+        $fields = [];
         foreach ($allgroupscourse as $group) {
             $fields[$group->id] = $group->name;
         }

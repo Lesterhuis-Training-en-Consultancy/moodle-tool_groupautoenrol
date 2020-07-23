@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * @file Params page for auto group enrollment as defined by Comete
+ * @file       Params page for auto group enrollment as defined by Comete
  *
  * @package    tool_groupautoenrol
  * @copyright  2016 Pascal
@@ -22,29 +22,32 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require_once('../../../config.php');
+defined('MOODLE_INTERNAL') || die;
+
 require_once('./manage_auto_group_enrol_form.php');
 
 $id = required_param('id', PARAM_INT);
-$url = new moodle_url('/admin/tool/groupautoenrol/manage_auto_group_enrol.php', array('id' => $id) );
+$url = new moodle_url('/admin/tool/groupautoenrol/manage_auto_group_enrol.php', ['id' => $id]);
 $PAGE->set_url($url);
+
 // TODO we need to gracefully shutdown if course not found.
-$course   = $DB->get_record('course', array('id' => $id), '*', MUST_EXIST);
-$context  = context_course::instance($course->id);
+$course = $DB->get_record('course', ['id' => $id], '*', MUST_EXIST);
+$context = context_course::instance($course->id);
 
 require_login($course);
 
-$coursecontext  = context_course::instance($course->id);
+$coursecontext = context_course::instance($course->id);
 require_capability('moodle/course:update', $coursecontext);
 
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('admin');
 $PAGE->set_heading($course->fullname);
 
-$form = new manage_auto_group_enrol_form($url, array('course' => $course, 'page' => $PAGE, 'context' => $context));
+$form = new manage_auto_group_enrol_form($url, ['course' => $course, 'page' => $PAGE, 'context' => $context]);
 
 if ($form->is_cancelled()) {
-    redirect( new moodle_url("$CFG->wwwroot/course/view.php", array('id' => $course->id) ) );
-} else if ( $data = $form->get_data() ) {
+    redirect(new moodle_url("$CFG->wwwroot/course/view.php", ['id' => $course->id]));
+} else if ($data = $form->get_data()) {
     // Checkbox cleaning : if checkbox are unchecked, the value is empty or null, this is not compatible with "tinyint" in database.
     if (!isset($data->enable_enrol) || ($data->enable_enrol == null) || ($data->enable_enrol == "")) {
         $data->enable_enrol = 0;
@@ -61,14 +64,14 @@ if ($form->is_cancelled()) {
         $groupautoenrol->groupslist = implode(",", $data->groupslist);
     }
 
-    $record = $DB->get_record('tool_groupautoenrol', array('courseid' => $course->id), 'id');
+    $record = $DB->get_record('tool_groupautoenrol', ['courseid' => $course->id], 'id');
     if (!$record) {
         $DB->insert_record('tool_groupautoenrol', $groupautoenrol, false);
     } else {
         $groupautoenrol->id = $record->id;
         $DB->update_record('tool_groupautoenrol', $groupautoenrol);
     }
-    redirect( new moodle_url("$CFG->wwwroot/admin/tool/groupautoenrol/manage_auto_group_enrol.php", array('id' => $course->id) ));
+    redirect(new moodle_url("$CFG->wwwroot/admin/tool/groupautoenrol/manage_auto_group_enrol.php", ['id' => $course->id]));
 }
 
 echo $OUTPUT->header();

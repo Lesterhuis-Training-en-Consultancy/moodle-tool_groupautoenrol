@@ -37,10 +37,10 @@ class manage_auto_group_enrol_form extends moodleform {
     public function definition() {
         global $USER, $CFG, $DB;
 
-        $mform          = $this->_form;
-        $page           = $this->_customdata['page'];
-        $course         = $this->_customdata['course'];
-        $context        = $this->_customdata['context'];
+        $mform = $this->_form;
+        $page = $this->_customdata['page'];
+        $course = $this->_customdata['course'];
+        $context = $this->_customdata['context'];
 
         auto_group_enrol_form($mform, $page, $course, $context);
 

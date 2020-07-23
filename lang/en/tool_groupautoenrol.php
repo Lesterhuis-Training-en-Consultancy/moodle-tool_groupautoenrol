@@ -13,6 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+defined('MOODLE_INTERNAL') || die;
 
 $string['pluginname'] = 'Automatic enrolment in groups';
 $string['coursemenu_item'] = 'Auto-enrol in groups';
@@ -26,5 +27,5 @@ $string['auto_group_form_enable_enrol'] = 'Enable automatic enrolment in groups 
 $string['auto_group_form_rand_method'] = 'Random enrolment';
 $string['auto_group_form_usegroupslist'] = 'Enrol users in selected groups only :';
 $string['auto_group_form_groupslist'] = 'Choose groups :';
-$string['auto_group_form_rolelist']  = 'Select role(s) concerned';
+$string['auto_group_form_rolelist'] = 'Select role(s) concerned';
 $string['auto_group_enrol_form_no_group_found'] = 'Create groups first !';

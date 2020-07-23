@@ -14,29 +14,38 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Setup "Automatics groups" link in Courseadmin->users menu
  *
- * Test TravisCI
- *
- * @package         tool_groupautoenrol
- * @param array     $settings
- * @param object    $context
- * @return void
+ * @package    tool_groupautoenrol
+ * @copyright  2016 Pascal
+ * @author     Pascal M - https://github.com/pascal-my
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die;
 
+/**
+ * @param $navigation
+ * @param $course
+ * @param $context
+ *
+ * @throws coding_exception
+ * @throws moodle_exception
+ */
 function tool_groupautoenrol_extend_navigation_course($navigation, $course, $context) {
 
-    if ( ($context instanceof context_course || $context instanceof context_module )  && $context->instanceid > 1) {
-
-        if (has_capability("moodle/course:managegroups", $context)) {
-            // Add link to manage automatic group enrolment.
-            $url = new moodle_url(
-            '/admin/tool/groupautoenrol/manage_auto_group_enrol.php',
-            array('id' => $context->instanceid)
-            );
-            $usermenu = $navigation->get('users');
-            $usermenu->add(get_string('menu_auto_groups', 'tool_groupautoenrol'), $url);
-        }
-		
+    if (!($context instanceof context_course || $context instanceof context_module) && empty($context->instanceid)) {
+        return;
     }
+
+    if (!has_capability("moodle/course:managegroups", $context)) {
+        return;
+    }
+
+    // Add link to manage automatic group enrolment.
+    $url = new moodle_url(
+        '/admin/tool/groupautoenrol/manage_auto_group_enrol.php',
+        ['id' => $context->instanceid]
+    );
+
+    $usermenu = $navigation->get('users');
+    $usermenu->add(get_string('menu_auto_groups', 'tool_groupautoenrol'), $url);
 }

@@ -24,10 +24,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2016041101;    // The (date) version of this module + 2 extra digital for daily versions.
-                                  // This version number is displayed into /admin/forms.php.
+$plugin->version = 2020072300;    // The (date) version of this module + 2 extra digital for daily versions.
 $plugin->requires = 2013040500;   // Requires this Moodle version - at least 2.0.
 $plugin->cron = 0;
 $plugin->component = 'tool_groupautoenrol';
-$plugin->release = '1.1.2';
+$plugin->release = '3.9.0';
 $plugin->maturity = MATURITY_STABLE;
