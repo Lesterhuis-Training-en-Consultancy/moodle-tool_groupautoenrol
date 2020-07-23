@@ -24,8 +24,6 @@
 require_once('../../../config.php');
 defined('MOODLE_INTERNAL') || die;
 
-require_once('./manage_auto_group_enrol_form.php');
-
 $id = required_param('id', PARAM_INT);
 $url = new moodle_url('/admin/tool/groupautoenrol/manage_auto_group_enrol.php', ['id' => $id]);
 $PAGE->set_url($url);
