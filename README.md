@@ -1,6 +1,6 @@
 # Moodle-admin_tool_groupautoenrol
 
-Version 3.9.0 (stable version) for Moodle 3.9.0 and 4.0
+Version 3.9.0 (stable version) for Moodle 3.9.0 to 4.1
 
 Plugin to randomly auto enrol students in Moodle courses groups when they are enrolled into the course (whatever the enrol methods : auto-enrol by key, cohorts sync or manual enrol)
 
@@ -39,4 +39,4 @@ https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y5DQB9F8AJB
 - 1.1 : stable version not working (bug)
 - 1.1.1 : stable version working as local plugin for Moodle 2.x (see https://github.com/pascal-my/moodle-local_groupautoenrol)
 - 1.1.2 : stable version working as admin tool plugin for Moodle 3.x
-- 3.9.0 : Moodle 3.9 & PHP7.2 version | Moodle 4.0 & PHP 7.4 version
+- 3.9.0 : Moodle 3.9 & PHP7.2 version | Moodle 4.0 & PHP 7.4 version | Moodle 4.1 & PHP 8.0 version
