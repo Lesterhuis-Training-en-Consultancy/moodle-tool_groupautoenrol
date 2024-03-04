@@ -24,21 +24,31 @@
 
 namespace tool_groupautoenrol\form;
 
+use html_writer;
+use moodle_url;
 use moodleform;
 
 defined('MOODLE_INTERNAL') || die;
 
+global $CFG;
 require_once("$CFG->libdir/formslib.php");
 
 /**
- * manage_auto_group_enrol_form class
+ * Class manage_auto_group_enrol_form
+ *
+ * @package    tool_groupautoenrol
+ * @copyright  2016 Pascal
+ * @author     Pascal M - https://github.com/pascal-my
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class manage_auto_group_enrol_form extends moodleform {
 
     /**
      * Definition
+     *
+     * @return void
      */
-    public function definition() : void {
+    public function definition(): void {
         $this->auto_group_enrol_form();
         $this->add_action_buttons();
     }
@@ -50,8 +60,8 @@ class manage_auto_group_enrol_form extends moodleform {
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function auto_group_enrol_form() : void {
-        global $CFG, $DB;
+    public function auto_group_enrol_form(): void {
+        global $DB;
         $mform = &$this->_form;
         $course = $this->_customdata['course'];
         $allgroupscourse = groups_get_all_groups($course->id);
@@ -60,17 +70,29 @@ class manage_auto_group_enrol_form extends moodleform {
 
         // Group(s) must be created first.
         if (empty($allgroupscourse)) {
-            // @TODO Use Moodle url.
-            $mform->addElement('static', 'no_group_found', '', "<a href='" . $CFG->wwwroot . "/group/index.php?id=" . $course->id . "'>" .
-                get_string('auto_group_enrol_form_no_group_found', 'tool_groupautoenrol') . "</a>");
+
+            $groupurl = new moodle_url('/group/index.php', ['id' => $course->id]);
+            $link = html_writer::link(
+                $groupurl,
+                get_string('auto_group_enrol_form_no_group_found', 'tool_groupautoenrol')
+            );
+            $mform->addElement('static', 'no_group_found', '', $link);
 
             return;
         }
 
         $instance = $DB->get_record('tool_groupautoenrol', ['courseid' => $course->id]);
-        $mform->addElement('checkbox', 'enable_enrol', get_string('auto_group_form_enable_enrol', 'tool_groupautoenrol'));
+        $mform->addElement(
+            'checkbox',
+            'enable_enrol',
+            get_string('auto_group_form_enable_enrol', 'tool_groupautoenrol')
+        );
 
-        $mform->addElement('checkbox', 'use_groupslist', get_string('auto_group_form_usegroupslist', 'tool_groupautoenrol'));
+        $mform->addElement(
+            'checkbox',
+            'use_groupslist',
+            get_string('auto_group_form_usegroupslist', 'tool_groupautoenrol')
+        );
         $mform->disabledIf('use_groupslist', 'enable_enrol');
 
         $fields = [];
@@ -78,7 +100,12 @@ class manage_auto_group_enrol_form extends moodleform {
             $fields[$group->id] = $group->name;
         }
 
-        $select = $mform->addElement('select', 'groupslist', get_string('auto_group_form_groupslist', 'tool_groupautoenrol'), $fields);
+        $select = $mform->addElement(
+            'select',
+            'groupslist',
+            get_string('auto_group_form_groupslist', 'tool_groupautoenrol'),
+            $fields
+        );
         $select->setMultiple(true);
 
         $mform->disabledIf('groupslist', 'enable_enrol');
@@ -87,5 +114,7 @@ class manage_auto_group_enrol_form extends moodleform {
         $mform->setDefault('use_groupslist', $instance->use_groupslist ?? 0);
         $mform->setDefault('groupslist', explode(",", $instance->groupslist ?? ''));
         $mform->setDefault('enable_enrol', $instance->enable_enrol ?? 0);
+
     }
+
 }

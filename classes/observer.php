@@ -25,10 +25,13 @@
 
 use core\event\user_enrolment_created;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Event observer for tool_groupautoenrol.
+ *
+ * @package    tool_groupautoenrol
+ * @copyright  2016 Pascal
+ * @author     Pascal M - https://github.com/pascal-my
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class tool_groupautoenrol_observer {
 
@@ -42,7 +45,7 @@ class tool_groupautoenrol_observer {
      * @throws coding_exception
      * @throws dml_exception
      */
-    public static function user_is_enrolled(user_enrolment_created $event) : bool {
+    public static function user_is_enrolled(user_enrolment_created $event): bool {
         global $CFG, $DB;
         require_once($CFG->dirroot . '/group/lib.php');
         $enroldata = $event->get_record_snapshot($event->objecttable, $event->objectid);
@@ -59,7 +62,7 @@ class tool_groupautoenrol_observer {
             return true;
         }
 
-        // Checking if user is not already into theses groups.
+        // Checking if user is not already into these groups.
         if (self::user_is_group_member($groupstouse, $enroldata)) {
             return true;
         }
@@ -71,21 +74,24 @@ class tool_groupautoenrol_observer {
     }
 
     /**
-     * @param stdClass               $groupautoenrol
+     * Get the groups to use for the course.
+     *
+     * @param stdClass $groupautoenrol
      * @param user_enrolment_created $event
      *
      * @return array
      */
-    private static function get_course_groups(stdClass $groupautoenrol, user_enrolment_created $event) : array {
+    private static function get_course_groups(stdClass $groupautoenrol, user_enrolment_created $event): array {
         $groupstouse = [];
         if (!empty($groupautoenrol->use_groupslist)) {
 
             // If use_groupslist == 1, we need to check.
-            // a) if the list is not empty.
+            // A) if the list is not empty.
             if (!empty($groupautoenrol->groupslist)) {
                 $groupstemp = explode(",", $groupautoenrol->groupslist);
 
-                // b) if the listed groups still exists (because when a group is deleted, groupautoenrol table is not updated !).
+                // B) if the listed groups still exists
+                // (because when a group is deleted, groupautoenrol table is not updated !).
                 $allgroupscourse = groups_get_all_groups($event->courseid);
 
                 foreach ($groupstemp as $group) {
@@ -107,13 +113,15 @@ class tool_groupautoenrol_observer {
     }
 
     /**
+     * Add user to group.
+     *
      * @param stdClass $groupautoenrol
-     * @param array    $groupstouse
+     * @param array $groupstouse
      * @param stdClass $enroldata
      *
      * @throws coding_exception
      */
-    private static function add_user_to_group(stdClass $groupautoenrol, array $groupstouse, stdClass $enroldata) : void {
+    private static function add_user_to_group(stdClass $groupautoenrol, array $groupstouse, stdClass $enroldata): void {
         global $USER;
 
         if (!empty($groupautoenrol->enrol_method)) {
@@ -124,11 +132,11 @@ class tool_groupautoenrol_observer {
                 if (($groupname[strlen($groupname) - 2] <= $USER->lastname[0])
                     && ($groupname[strlen($groupname) - 1] >= $USER->lastname[0])) {
                     groups_add_member($group->id, $enroldata->userid);
-                    break; // exit foreach (is it working ?)
+                    break; // Exit foreach (is it working ?).
                 }
             }
         } else {
-            // array_rand return key not value !
+            // Array_rand return key not value!
             $randkeys = array_rand($groupstouse);
             $group2add = $groupstouse[$randkeys];
             groups_add_member($group2add, $enroldata->userid);
@@ -136,12 +144,14 @@ class tool_groupautoenrol_observer {
     }
 
     /**
-     * @param array    $groupstouse
+     * Check if user is already in one of the groups.
+     *
+     * @param array $groupstouse
      * @param stdClass $enroldata
      *
      * @return bool
      */
-    private static function user_is_group_member(array $groupstouse, stdClass $enroldata) : bool {
+    private static function user_is_group_member(array $groupstouse, stdClass $enroldata): bool {
 
         foreach ($groupstouse as $group) {
             if (groups_is_member($group->id, $enroldata->userid)) {
@@ -151,4 +161,5 @@ class tool_groupautoenrol_observer {
 
         return false;
     }
+
 }

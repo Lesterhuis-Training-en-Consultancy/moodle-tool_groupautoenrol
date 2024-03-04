@@ -13,14 +13,18 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
 /**
- * @file       Params page for auto group enrollment as defined by Comete
+ * Manage auto group enrolment
+ *
+ * Params page for auto group enrollment as defined by Comete
  *
  * @package    tool_groupautoenrol
  * @copyright  2016 Pascal
  * @author     Pascal M - https://github.com/pascal-my
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 require_once('../../../config.php');
 defined('MOODLE_INTERNAL') || die;
 
@@ -46,7 +50,7 @@ $form = new \tool_groupautoenrol\form\manage_auto_group_enrol_form($url, [
 ]);
 
 if ($form->is_cancelled()) {
-    redirect(new moodle_url("$CFG->wwwroot/course/view.php", ['id' => $course->id]));
+    redirect(new moodle_url('/course/view.php', ['id' => $course->id]));
 } else if ($data = $form->get_data()) {
 
     if (empty($data->enable_enrol)) {
@@ -74,7 +78,11 @@ if ($form->is_cancelled()) {
         $DB->update_record('tool_groupautoenrol', $groupautoenrol);
     }
 
-    redirect(new moodle_url("$CFG->wwwroot/admin/tool/groupautoenrol/manage_auto_group_enrol.php", ['id' => $course->id]));
+    redirect(
+        new moodle_url('/admin/tool/groupautoenrol/manage_auto_group_enrol.php',
+            ['id' => $course->id]
+        )
+    );
 }
 
 echo $OUTPUT->header();

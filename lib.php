@@ -14,23 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
+ * Lib functions
  *
  * @package    tool_groupautoenrol
  * @copyright  2016 Pascal
  * @author     Pascal M - https://github.com/pascal-my
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die;
 
 /**
- * @param $navigation
- * @param $course
- * @param $context
+ * Extend the navigation for course.
  *
- * @throws coding_exception
- * @throws moodle_exception
+ * @param navigation_node $navigation
+ * @param object $course
+ * @param context $context
+ *
+ * @return void
  */
-function tool_groupautoenrol_extend_navigation_course($navigation, $course, $context) {
+function tool_groupautoenrol_extend_navigation_course(navigation_node $navigation, object $course, context $context): void {
 
     if (!($context instanceof context_course || $context instanceof context_module) && empty($context->instanceid)) {
         return;
@@ -45,7 +46,7 @@ function tool_groupautoenrol_extend_navigation_course($navigation, $course, $con
         '/admin/tool/groupautoenrol/manage_auto_group_enrol.php',
         ['id' => $context->instanceid]
     );
-
     $usermenu = $navigation->get('users');
+
     $usermenu->add(get_string('menu_auto_groups', 'tool_groupautoenrol'), $url);
 }

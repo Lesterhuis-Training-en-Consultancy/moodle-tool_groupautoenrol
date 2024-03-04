@@ -13,6 +13,16 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * EN language file for tool_groupautoenrol
+ *
+ * @package    tool_groupautoenrol
+ * @copyright  2016 Pascal
+ * @author     Pascal M - https://github.com/pascal-my
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die;
 
 $string['pluginname'] = 'Automatic enrolment in groups';

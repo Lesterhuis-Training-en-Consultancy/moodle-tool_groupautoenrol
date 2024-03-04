@@ -19,21 +19,19 @@
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
- * @package   moodle-admin_tool_groupautoenrol
+ * @package   tool_groupautoenrol
  * @copyright 23/07/2020 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Luuk Verhoeven
  **/
 
 namespace local_commander\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class provider
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
- * @package   moodle-admin_tool_groupautoenrol
+ * @package   tool_groupautoenrol
  * @copyright 23/07/2020 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Luuk Verhoeven
  **/
@@ -44,7 +42,8 @@ class provider implements \core_privacy\local\metadata\null_provider {
      *
      * @return  string
      */
-    public static function get_reason() : string {
+    public static function get_reason(): string {
         return 'privacy:null_reason';
     }
+
 }
