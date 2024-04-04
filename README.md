@@ -41,3 +41,4 @@ https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y5DQB9F8AJB
 - 1.1.2 : stable version working as admin tool plugin for Moodle 3.x
 - 3.9.0 : Moodle 3.9 & PHP7.2 version | Moodle 4.0 & PHP 7.4 version | Moodle 4.1 & PHP 8.0 version
 - 4.2.0 : Moodle 4.2 & PHP 8.0 version
+- 4.2.1 : Fix (https://github.com/Lesterhuis-Training-en-Consultancy/moodle-tool_groupautoenrol/issues/2)  Increase size of groupslist col #2
