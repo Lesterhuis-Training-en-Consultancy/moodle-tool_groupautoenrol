@@ -19,7 +19,7 @@
  *
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
- * @package   moodle-tool_groupautoenrol
+ * @package   tool_groupautoenrol
  * @copyright 04/04/2024 Mfreak.nl | LdesignMedia.nl - Luuk Verhoeven
  * @author    Luuk Verhoeven
  **/
@@ -27,10 +27,10 @@
 /**
  * xmldb_tool_groupautoenrol_upgrade
  *
- * @param $oldversion
- * @return true
+ * @param int $oldversion
+ * @return bool true
  */
-function xmldb_tool_groupautoenrol_upgrade($oldversion) {
+function xmldb_tool_groupautoenrol_upgrade(int $oldversion): bool {
 
     global $DB;
     $dbman = $DB->get_manager();
