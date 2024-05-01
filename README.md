@@ -14,7 +14,7 @@ Plugin to randomly auto enrol students in Moodle courses groups when they are en
 - you can choose to auto-enrol students in all existing course or specific ones
 
 ## Compatibility :
-- Tested with Moodle 3.9, Moodle 4.2 and Moodle 4.4
+- Tested with Moodle 3.9, Moodle 4.2, Moodle 4.3 and Moodle 4.4
 - Another version of the plugin exist and works with Moodle 2.5 and 2.7 (I did not test it with the others versions but should work with all 2.x).
 It's a local plugin because adding link into "Course administration" menu was not possible for admin tool before Moodle 3.0
 You can get it here : https://github.com/pascal-my/moodle-local_groupautoenrol/tree/STABLE
@@ -43,3 +43,5 @@ https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Y5DQB9F8AJB
 - 4.2.0 : Moodle 4.2 & PHP 8.0 version
 - 4.2.1 : Fix (https://github.com/Lesterhuis-Training-en-Consultancy/moodle-tool_groupautoenrol/issues/2)  Increase size of groupslist col #2
 - 4.2.0 : Moodle 4.2 & PHP 8.1 version
+- 4.3.0 : Moodle
+- 4.4.0 : Moodle
